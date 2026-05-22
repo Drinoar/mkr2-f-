@@ -11,3 +11,20 @@ class CategoryModelTest(TestCase):
         self.assertEqual(str(category), "Desserts")
 
 
+
+class RecipeModelTest(TestCase):
+
+    def test_create_recipe(self):
+        category = Category.objects.create(name="Soups")
+
+        recipe = Recipe.objects.create(
+            title="Borscht",
+            description="Traditional soup",
+            instructions="Cook vegetables",
+            ingredients="Beetroot, potato, carrot",
+            category=category
+        )
+
+        self.assertEqual(recipe.title, "Borscht")
+        self.assertEqual(recipe.category.name, "Soups")
+        self.assertEqual(str(recipe), "Borscht")
